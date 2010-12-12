@@ -1,6 +1,6 @@
 #include "testdriver.h"
 
-#include <iostream>
+using namespace std;
 
 namespace TestDriver
 {
@@ -8,6 +8,10 @@ namespace TestDriver
     TestSuite::TestSuite(string name)
     {
         _name = name;
+        _passes = 0;
+        _fails = 0;
+        _errors = 0;
+        _unimplemented = 0;
     }
 
     void TestSuite::add(TestCase* tcase)
@@ -17,32 +21,89 @@ namespace TestDriver
 
     void TestSuite::run()
     {
-        std::cout << "Running " << _name << " tests..." << std::endl;
-        int passed = 0;
-        int failed = 0;
-        int error = 0;
-        int count = 0;
-
         for (vector<TestCase*>::iterator it = _cases.begin(); it != _cases.end(); ++it) {
             try {
                 try {
                     (*it)->run();
-                    std::cout << "Test \"" << (*it)->getName() << "\": passed :)" << std::endl;
+
+                    if ( (*it)->hasImplemented() ) {
+                        passed((*it)->getName());
+                        _passes++;
+                    } else {
+                        wip((*it)->getName());
+                        _unimplemented++;
+                    }
+
                 } catch (TestPassedException& e) {
-                    std::cout << "Test \"" << (*it)->getName() << "\": " << e.what() << " :)" << std::endl;
+                    passed((*it)->getName(), e.what());
+                    _passes++;
                 }
-                    passed++;
             } catch (TestFailedException& e) {
-                std::cout << "Test \"" << (*it)->getName() << "\": " << e.what() << " :(" << std::endl;
-                failed++;
+                failed((*it)->getName(), e.what());
+                _fails++;
             } catch (exception& e) {
-                std::cout << "Test \"" << (*it)->getName() << "\" had following error: " << e.what() << " :!" << std::endl;
-                error++;
+                error((*it)->getName(), e.what());
+                _errors++;
             }
-            count++;
         }
 
-        std::cout << "Tested " << count << " cases: " << passed << " passed, " << failed << " failed and " << error << " errors." << std::endl;
+    }
+
+    void TestSuite::wip(const string name)
+    {
+        _status << "Test \"" << name << "\" not yet implemented!" << endl;
+    }
+
+    void TestSuite::passed(const string name)
+    {
+        passed(name, "passed");
+    }
+
+    void TestSuite::passed(const string name, const string message)
+    {
+        _status << "Test \"" << name << "\": " << message << " :)" << endl;
+    }
+
+    void TestSuite::failed(const string name, const string message)
+    {
+        _status << "Test \"" << name << "\": " << message << " :(" << endl;
+    }
+
+    void TestSuite::error(const string name, const string message)
+    {
+        _status << "Test \"" << name << "\" had following error: " << message << " :!" << endl;
+    }
+
+    const string TestSuite::status()
+    {
+        _status << endl << "Tested \"" << _name << "\" with " << _cases.size() << " cases: " << _passes << " passed, " << _fails << " failed, " << _errors << " errors and " << _unimplemented << " unimplemented ones." << endl;
+
+        return _status.str();
+    }
+
+    int TestSuite::passCount()
+    {
+        return _passes;
+    }
+    
+    int TestSuite::failCount()
+    {
+        return _fails;
+    }
+
+    int TestSuite::errorCount()
+    {
+        return _errors;
+    }
+
+    int TestSuite::unimplementedCount()
+    {
+        return _unimplemented;
+    }
+
+    int TestSuite::caseCount()
+    {
+        return _cases.size();
     }
 
 }
