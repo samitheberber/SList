@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <exception>
 
 using namespace std;
 
@@ -14,7 +15,12 @@ namespace TestDriver
         private:
             string _name;
         protected:
-            // add test methods here
+            void pass();
+            void pass(string);
+            void fail();
+            void fail(string);
+            void checkTrue(bool);
+            void checkFalse(bool);
         public:
             TestCase(string);
             virtual void run() = 0;
@@ -35,10 +41,33 @@ namespace TestDriver
     class TestSuiteRunner
     {
         private:
-            std::vector<TestSuite*> _suites;
+            vector<TestSuite*> _suites;
         public:
             void run();
             void add(TestSuite*);
+    };
+
+    class TestException: public exception
+    {
+        private:
+            const char* _message;
+        public:
+            TestException(string);
+            virtual const char* what() const throw();
+    };
+
+    class TestPassedException: public TestException
+    {
+        public:
+            TestPassedException();
+            TestPassedException(string);
+    };
+
+    class TestFailedException: public TestException
+    {
+        public:
+            TestFailedException();
+            TestFailedException(string);
     };
 
 }
