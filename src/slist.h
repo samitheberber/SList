@@ -37,6 +37,7 @@ class SList
         void erase_after(iterator);
         iterator begin(void);
         iterator end(void);
+        void swap(SList&);
 };
 
 #endif

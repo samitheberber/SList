@@ -75,6 +75,13 @@ SList::iterator SList::end(void)
     return SList::iterator(NULL);
 }
 
+void SList::swap(SList& other)
+{
+    Node* thisHead = _head;
+    _head = other._head;
+    other._head = thisHead;
+}
+
 // Iterator
 
 SList::iterator::iterator(Node* node) : position(node)

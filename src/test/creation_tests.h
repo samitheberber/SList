@@ -9,6 +9,13 @@ class FrontIsEmpty: public TestDriver::TestCase
         void run();
 };
 
+class SwapTwoLists: public TestDriver::TestCase
+{
+    public:
+        SwapTwoLists();
+        void run();
+};
+
 class CreationTests: public TestDriver::TestSuite
 {
     public:
