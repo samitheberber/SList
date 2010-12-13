@@ -2,6 +2,7 @@
 #define H_SLIST_
 
 #include <string>
+#include <iterator>
 
 class SList
 {
@@ -17,10 +18,24 @@ class SList
         };
         Node* _head;
     public:
+        class iterator : public std::iterator<std::forward_iterator_tag, std::string>
+        {
+            private:
+                Node* position;
+            public:
+                iterator(Node*);
+                bool operator!=(const iterator&);
+                void operator++();
+                std::string operator*();
+                friend class SList;
+        };
         SList();
         const std::string front(void);
         void push_front(std::string);
         void pop_front(void);
+        void insert_after(iterator, std::string);
+        iterator begin(void);
+        iterator end(void);
 };
 
 #endif

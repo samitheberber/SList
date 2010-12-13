@@ -25,10 +25,12 @@ namespace TestDriver
             void checkNotSame(void*, void*);
             void checkTrue(bool);
             void checkFalse(bool);
-            void checkEquals(bool,bool);
+            void checkEquals(int,int);
             void checkEquals(const string,const string);
-            void checkNotEquals(bool,bool);
+            void checkEquals(bool,bool);
+            void checkNotEquals(int,int);
             void checkNotEquals(const string,const string);
+            void checkNotEquals(bool,bool);
         public:
             TestCase(string);
             virtual void run() = 0;

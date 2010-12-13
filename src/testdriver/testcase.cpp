@@ -77,6 +77,17 @@ namespace TestDriver
             throw TestFailedException("checkFalse(bool) got true");
     }
 
+    void TestCase::checkEquals(int actual, int expected)
+    {
+        _implemented = true;
+        try {
+            checkTrue(actual == expected);
+        } catch (TestFailedException&) {
+            ostringstream str; str << "checkEquals(int,int) failed with (" << actual << "," << expected << ")";
+            throw TestFailedException(str.str());
+        }
+    }
+
     void TestCase::checkEquals(bool actual, bool expected)
     {
         _implemented = true;
@@ -93,6 +104,17 @@ namespace TestDriver
         _implemented = true;
         if (actual != expected) {
             ostringstream str; str << "checkEquals(string,string) failed with (" << actual << "," << expected << ")";
+            throw TestFailedException(str.str());
+        }
+    }
+
+    void TestCase::checkNotEquals(int actual, int expected)
+    {
+        _implemented = true;
+        try {
+            checkFalse(actual == expected);
+        } catch (TestFailedException&) {
+            ostringstream str; str << "checkNotEquals(int,int) failed with (" << actual << "," << expected << ")";
             throw TestFailedException(str.str());
         }
     }

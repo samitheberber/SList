@@ -19,6 +19,13 @@ class PushFrontTwice: public TestDriver::TestCase
         void run();
 };
 
+class InsertAfterOnEmptySList: public TestDriver::TestCase
+{
+    public:
+        InsertAfterOnEmptySList();
+        void run();
+};
+
 class InsertAfter: public TestDriver::TestCase
 {
     public:

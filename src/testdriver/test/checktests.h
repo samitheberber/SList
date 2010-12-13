@@ -42,6 +42,20 @@ class CheckFalse: public TestDriver::TestCase
         void run();
 };
 
+class CheckEqualsInt: public TestDriver::TestCase
+{
+    public:
+        CheckEqualsInt() : TestDriver::TestCase("CheckEqualsInt") {};
+        void run();
+};
+
+class CheckNotEqualsInt: public TestDriver::TestCase
+{
+    public:
+        CheckNotEqualsInt() : TestDriver::TestCase("CheckNotEqualsInt") {};
+        void run();
+};
+
 class CheckEqualsBool: public TestDriver::TestCase
 {
     public:
@@ -80,6 +94,8 @@ class CheckTests: public TestDriver::TestSuite
             add(new CheckNotSame());
             add(new CheckTrue());
             add(new CheckFalse());
+            add(new CheckEqualsInt());
+            add(new CheckNotEqualsInt());
             add(new CheckEqualsBool());
             add(new CheckNotEqualsBool());
             add(new CheckEqualsString());

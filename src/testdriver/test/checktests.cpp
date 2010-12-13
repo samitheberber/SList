@@ -129,6 +129,54 @@ void CheckFalse::run()
         throw TestDriver::TestFailedException("checkFalse(true) didn't fail");
 }
 
+void CheckEqualsInt::run()
+{
+    checkEquals(1,1);
+    checkEquals(2,2);
+
+    bool fail = false;
+    try {
+        checkEquals(1,2);
+        fail = true;
+    } catch (TestDriver::TestFailedException&) {}
+
+    if (fail)
+        throw TestDriver::TestFailedException("checkEquals(int,int) didn't fail");
+
+    fail = false;
+    try {
+        checkEquals(2,1);
+        fail = true;
+    } catch (TestDriver::TestFailedException&) {}
+
+    if (fail)
+        throw TestDriver::TestFailedException("checkEquals(int,int) didn't fail");
+}
+
+void CheckNotEqualsInt::run()
+{
+    bool fail = false;
+    try {
+        checkNotEquals(1,1);
+        fail = true;
+    } catch (TestDriver::TestFailedException&) {}
+
+    if (fail)
+        throw TestDriver::TestFailedException("checkEquals(int,int) didn't fail");
+
+    fail = false;
+    try {
+        checkNotEquals(2,2);
+        fail = true;
+    } catch (TestDriver::TestFailedException&) {}
+
+    if (fail)
+        throw TestDriver::TestFailedException("checkEquals(int,int) didn't fail");
+
+    checkNotEquals(1,2);
+    checkNotEquals(2,1);
+}
+
 void CheckEqualsBool::run()
 {
     checkEquals(true,true);

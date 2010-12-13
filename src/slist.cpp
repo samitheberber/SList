@@ -43,3 +43,43 @@ void SList::pop_front(void)
         throw std::logic_error("Can't pop empty SList");
     _head = _head->next;
 }
+
+void SList::insert_after(SList::iterator iter, std::string value)
+{
+    if (iter.position == NULL)
+        throw std::logic_error("Can't insert after empty node");
+    Node* node = new Node(value);
+    node->next = iter.position->next;
+    iter.position->next = node;
+}
+
+SList::iterator SList::begin(void)
+{
+    return SList::iterator(_head);
+}
+
+SList::iterator SList::end(void)
+{
+    return SList::iterator(NULL);
+}
+
+// Iterator
+
+SList::iterator::iterator(Node* node) : position(node)
+{
+}
+
+bool SList::iterator::operator!=(const SList::iterator& other)
+{
+    return (position != other.position);
+}
+
+void SList::iterator::operator++()
+{
+    position = position->next;
+}
+
+std::string SList::iterator::operator*()
+{
+    return position->value();
+}
