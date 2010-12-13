@@ -18,16 +18,21 @@ class SList
         };
         Node* _head;
     public:
-        class iterator : public std::iterator<std::forward_iterator_tag, std::string>
+        class const_iterator : public std::iterator<std::forward_iterator_tag, const std::string>
         {
-            private:
+            protected:
                 Node* position;
             public:
-                iterator(Node*);
-                bool operator!=(const iterator&);
+                const_iterator(Node*);
+                bool operator!=(const const_iterator&);
                 void operator++();
-                std::string operator*();
+                const std::string operator*();
                 friend class SList;
+        };
+        class iterator : public const_iterator
+        {
+            public:
+                iterator(Node*);
         };
         SList();
         const std::string front(void);
@@ -35,6 +40,8 @@ class SList
         void pop_front(void);
         void insert_after(iterator, std::string);
         void erase_after(iterator);
+        const_iterator begin(void) const;
+        const_iterator end(void) const;
         iterator begin(void);
         iterator end(void);
         void swap(SList&);

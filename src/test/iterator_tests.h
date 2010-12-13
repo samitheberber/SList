@@ -26,6 +26,27 @@ class IteratorFromMoreThanOneSizeSList: public TestDriver::TestCase
         void run();
 };
 
+class ConstIteratorFromEmptyList: public TestDriver::TestCase
+{
+    public:
+        ConstIteratorFromEmptyList();
+        void run();
+};
+
+class ConstIteratorFromOneSizeSList: public TestDriver::TestCase
+{
+    public:
+        ConstIteratorFromOneSizeSList();
+        void run();
+};
+
+class ConstIteratorFromMoreThanOneSizeSList: public TestDriver::TestCase
+{
+    public:
+        ConstIteratorFromMoreThanOneSizeSList();
+        void run();
+};
+
 class ReverseWithEmptyList: public TestDriver::TestCase
 {
     public:

@@ -75,6 +75,16 @@ SList::iterator SList::end(void)
     return SList::iterator(NULL);
 }
 
+SList::const_iterator SList::begin(void) const
+{
+    return SList::const_iterator(_head);
+}
+
+SList::const_iterator SList::end(void) const
+{
+    return SList::const_iterator(NULL);
+}
+
 void SList::swap(SList& other)
 {
     Node* thisHead = _head;
@@ -99,21 +109,25 @@ void SList::reverse(void)
 
 // Iterator
 
-SList::iterator::iterator(Node* node) : position(node)
+SList::const_iterator::const_iterator(Node* node) : position(node)
 {
 }
 
-bool SList::iterator::operator!=(const SList::iterator& other)
+bool SList::const_iterator::operator!=(SList::const_iterator const& other)
 {
     return (position != other.position);
 }
 
-void SList::iterator::operator++()
+void SList::const_iterator::operator++()
 {
     position = position->next;
 }
 
-std::string SList::iterator::operator*()
+const std::string SList::const_iterator::operator*()
 {
     return position->value();
+}
+
+SList::iterator::iterator(Node* node) : const_iterator(node)
+{
 }
