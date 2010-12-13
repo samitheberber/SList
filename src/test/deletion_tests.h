@@ -26,6 +26,20 @@ class PopFrontTwice: public TestDriver::TestCase
         void run();
 };
 
+class DeleteAfterOnEmptyList: public TestDriver::TestCase
+{
+    public:
+        DeleteAfterOnEmptyList();
+        void run();
+};
+
+class DeleteAfterOnEmptyFollower: public TestDriver::TestCase
+{
+    public:
+        DeleteAfterOnEmptyFollower();
+        void run();
+};
+
 class DeleteAfter: public TestDriver::TestCase
 {
     public:

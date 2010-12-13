@@ -6,6 +6,10 @@ DeletionTests::DeletionTests() : TestDriver::TestSuite("DeletionTests")
 {
     add(new PopFrontOfEmptyList());
     add(new PopFront());
+    add(new PopFrontTwice());
+    add(new DeleteAfterOnEmptyList());
+    add(new DeleteAfterOnEmptyFollower());
+    add(new DeleteAfter());
 }
 
 PopFrontOfEmptyList::PopFrontOfEmptyList() : TestDriver::TestCase("PopFrontOfEmptyList")
@@ -16,7 +20,7 @@ PopFront::PopFront() : TestDriver::TestCase("PopFront")
 {
 }
 
-PopFrontTwice::PopFrontTwice() : TestDriver::TestCase("PopFront")
+PopFrontTwice::PopFrontTwice() : TestDriver::TestCase("PopFrontTwice")
 {
 }
 
@@ -64,4 +68,54 @@ void PopFrontTwice::run()
     } catch (logic_error&) {
         pass();
     }
+}
+
+DeleteAfterOnEmptyList::DeleteAfterOnEmptyList() : TestDriver::TestCase("DeleteAfterOnEmptyList")
+{
+}
+
+DeleteAfterOnEmptyFollower::DeleteAfterOnEmptyFollower() : TestDriver::TestCase("DeleteAfterOnEmptyFollower")
+{
+}
+
+DeleteAfter::DeleteAfter() : TestDriver::TestCase("DeleteAfter")
+{
+}
+
+void DeleteAfterOnEmptyList::run()
+{
+    SList newList;
+    SList::iterator iter = newList.begin();
+    try {
+        newList.delete_after(iter);
+    } catch(logic_error&) {
+        pass();
+    }
+    fail();
+}
+
+void DeleteAfterOnEmptyFollower::run()
+{
+    SList newList;
+    newList.push_front("foobar");
+    SList::iterator iter = newList.begin();
+    try {
+        newList.delete_after(iter);
+    } catch(logic_error&) {
+        pass();
+    }
+    fail();
+}
+
+void DeleteAfter::run()
+{
+    SList newList;
+    newList.push_front("foobar");
+    newList.push_front("barfoo");
+    newList.push_front("barbaz");
+    SList::iterator iter = newList.begin();
+    newList.delete_after(iter);
+    checkEquals(newList.front(), "barbaz");
+    newList.pop_front();
+    checkEquals(newList.front(), "foobar");
 }
