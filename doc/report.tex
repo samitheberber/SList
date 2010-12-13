@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\begin{document}
+
+\title{SList - Ohjelmointitekniikka (C++)}
+\author{Sami Saada}
+
+\maketitle
+
+\begin{abstract}
+Tämän dokumentin olisi tarkoitus valaista kehittämääni testikehystä sekä
+toteutustani linkitetystä listasta.
+\end{abstract}
+
+\section{Testikehys}
+
+Testikehykseni koostuu kolmesta elementistä: testitapaus, testitapauksia säilövä
+säiliö ja näitä säiliöitä ajava suorittaja.
+
+\subsection{TestDriver::TestCase}
+
+Perus testitapaus, jonka testit määritetään run()-metodilla. Luokassa on
+apumetodeina liuta tarkistuksia kuormitetuilla parametreilla.
+
+Tämä on oleellisin osa testikehyksestäni.
+
+\section{SList}
+
+Kehitin testikehyksen ensin, joten SListin kehitys sujui kohtuullisesti TDD:tä
+hyväksi käyttäen. Jokainen toteutettu ominaisuus on huolella määritelty ja
+testattu ennen toteuttamista.
+
+\subsection{Toteutetut ominaisuudet}
+
+\begin{itemize}
+    \item Listan ja siihen liittyvien luokkien konstruktorit
+    \item front()
+    \item iterator
+    \item const\_iterator
+    \item push\_front()
+    \item pop\_front()
+    \item insert\_after()
+    \item erase\_after()
+    \item reverse()
+    \item swap()
+\end{itemize}
+
+\end{document}

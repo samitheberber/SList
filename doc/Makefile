@@ -1,7 +1,14 @@
 all: clean build
 
-build:
-	@echo Compiling documents
+TEX=report.tex
+TARGET=report.pdf
+
+LATEX_ARGS=--interaction batchmode
+
+$(TARGET): $(TEX)
+	pdflatex $(LATEX_ARGS) $(TEX)
 
 clean:
-	@echo Cleaning documents
+	rm *.aux *.log *.pdf
+
+build: $(TARGET)
