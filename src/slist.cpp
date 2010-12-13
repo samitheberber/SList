@@ -53,7 +53,7 @@ void SList::insert_after(SList::iterator iter, std::string value)
     iter.position->next = node;
 }
 
-void SList::delete_after(SList::iterator iter)
+void SList::erase_after(SList::iterator iter)
 {
     if (iter.position == NULL)
         throw std::logic_error("Can't delete after empty node");

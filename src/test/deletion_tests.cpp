@@ -87,7 +87,7 @@ void DeleteAfterOnEmptyList::run()
     SList newList;
     SList::iterator iter = newList.begin();
     try {
-        newList.delete_after(iter);
+        newList.erase_after(iter);
     } catch(logic_error&) {
         pass();
     }
@@ -100,7 +100,7 @@ void DeleteAfterOnEmptyFollower::run()
     newList.push_front("foobar");
     SList::iterator iter = newList.begin();
     try {
-        newList.delete_after(iter);
+        newList.erase_after(iter);
     } catch(logic_error&) {
         pass();
     }
@@ -114,7 +114,7 @@ void DeleteAfter::run()
     newList.push_front("barfoo");
     newList.push_front("barbaz");
     SList::iterator iter = newList.begin();
-    newList.delete_after(iter);
+    newList.erase_after(iter);
     checkEquals(newList.front(), "barbaz");
     newList.pop_front();
     checkEquals(newList.front(), "foobar");

@@ -34,7 +34,7 @@ class SList
         void push_front(std::string);
         void pop_front(void);
         void insert_after(iterator, std::string);
-        void delete_after(iterator);
+        void erase_after(iterator);
         iterator begin(void);
         iterator end(void);
 };
