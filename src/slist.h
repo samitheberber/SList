@@ -38,6 +38,7 @@ class SList
         iterator begin(void);
         iterator end(void);
         void swap(SList&);
+        void reverse(void);
 };
 
 #endif

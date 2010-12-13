@@ -26,6 +26,20 @@ class IteratorFromMoreThanOneSizeSList: public TestDriver::TestCase
         void run();
 };
 
+class ReverseWithEmptyList: public TestDriver::TestCase
+{
+    public:
+        ReverseWithEmptyList();
+        void run();
+};
+
+class ReverseWithMoreThanOneNode: public TestDriver::TestCase
+{
+    public:
+        ReverseWithMoreThanOneNode();
+        void run();
+};
+
 class IteratorTests: public TestDriver::TestSuite
 {
     public:

@@ -5,6 +5,8 @@ IteratorTests::IteratorTests() : TestDriver::TestSuite("IteratorTests")
     add(new IteratorFromEmptyList());
     add(new IteratorFromOneSizeSList());
     add(new IteratorFromMoreThanOneSizeSList());
+    add(new ReverseWithEmptyList());
+    add(new ReverseWithMoreThanOneNode());
 }
 
 IteratorFromEmptyList::IteratorFromEmptyList() : TestDriver::TestCase("IteratorFromEmptyList")
@@ -66,4 +68,36 @@ void IteratorFromMoreThanOneSizeSList::run()
 
     ++it;
     checkFalse(it != newList.end());
+}
+
+ReverseWithEmptyList::ReverseWithEmptyList() : TestDriver::TestCase("ReverseWithEmptyList")
+{
+}
+
+ReverseWithMoreThanOneNode::ReverseWithMoreThanOneNode() : TestDriver::TestCase("ReverseWithMoreThanOneNode")
+{
+}
+
+void ReverseWithEmptyList::run()
+{
+    SList newList;
+    newList.reverse();
+    pass();
+}
+
+void ReverseWithMoreThanOneNode::run()
+{
+    SList newList;
+    std::string str1 = "foobar";
+    std::string str2 = "barfoo";
+    std::string str3 = "barbaz";
+    newList.push_front(str1);
+    newList.push_front(str2);
+    newList.push_front(str3);
+    newList.reverse();
+    checkEquals(newList.front(), str1);
+    newList.pop_front();
+    checkEquals(newList.front(), str2);
+    newList.pop_front();
+    checkEquals(newList.front(), str3);
 }

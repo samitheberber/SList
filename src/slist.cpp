@@ -82,6 +82,21 @@ void SList::swap(SList& other)
     other._head = thisHead;
 }
 
+void SList::reverse(void)
+{
+    if (_head == NULL || _head->next == NULL)
+        return;
+
+    Node *tmp = NULL, *current = NULL;
+    while(_head) {
+        current = _head;
+        _head = _head->next;
+        current->next = tmp;
+        tmp = current;
+    }
+    _head = tmp;
+}
+
 // Iterator
 
 SList::iterator::iterator(Node* node) : position(node)
